@@ -6,14 +6,4 @@
   </div>
 </template>
 
-//
-<script>
-// import { mdbSpinner } from "mdbvue";
-// export default {
-//   name: "PageLoader",
-//   components: {
-//     mdbSpinner,
-//   },
-// };
-//
-</script>
+<script></script>

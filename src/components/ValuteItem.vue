@@ -6,10 +6,12 @@
           {{ item.Name }}
         </h5>
       </div>
-      <div class="content">
-        <p class="mb-2 mr-2">1 {{ item.CharCode }}</p>
+      <div @click.prevent="changeNominal" class="content">
+        <p class="mb-2 mr-2">1 {{ valute.name }}</p>
         <mdb-icon icon="arrows-alt-h" class="mb-2 mr-2 grey-text" size="lg" />
-        <p class="mb-2 mr-4">{{ item.Value }} RUB</p>
+        <p class="mb-2 mr-4">
+          {{ (valute.value / nominal.value).toFixed(4) }} {{ nominal.name }}
+        </p>
 
         <mdb-icon
           v-if="item.Value > item.Previous"
@@ -42,6 +44,21 @@ export default {
     mdbIcon,
   },
 
+  data() {
+    return {
+      nominal: { name: "RUB", value: this.item.Nominal },
+      valute: { name: this.item.CharCode, value: this.item.Value },
+    };
+  },
+
+  methods: {
+    changeNominal() {
+      let test = this.valute;
+      this.valute = this.nominal;
+      this.nominal = test;
+    },
+  },
+
   props: {
     item: Object,
   },
@@ -60,5 +77,10 @@ export default {
 .content {
   display: flex;
   align-items: center;
+}
+
+.content:hover {
+  cursor: pointer;
+  background-color: #e3f2fd;
 }
 </style>
