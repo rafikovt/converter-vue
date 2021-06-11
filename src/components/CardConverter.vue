@@ -3,7 +3,14 @@
     <mdb-card-body>
       <mdb-card-title class="small">Австарлийский доллар</mdb-card-title>
       <div class="content">
-        <select class="browser-default custom-select custom-select-sm w-50">
+        <select
+          class="browser-default custom-select custom-select-sm w-50"
+          @change="
+            main
+              ? $emit('updateMainValute', $event.target.value)
+              : $emit('updateComputedValute', $event.target.value)
+          "
+        >
           <option
             v-for="(item, index) in selectData"
             :key="index"
@@ -12,7 +19,13 @@
             {{ item.label }}
           </option>
         </select>
-        <mdb-input class="w-50" :disabled="!main" />
+        <mdb-input
+          type="number"
+          class="w-50"
+          :disabled="!main"
+          :value="main ? defaultValue : computedValue"
+          @input="$emit('changeValue', $event)"
+        />
       </div>
     </mdb-card-body>
   </mdb-card>
@@ -32,6 +45,8 @@ export default {
   props: {
     selectData: Array,
     main: Boolean,
+    computedValue: String,
+    defaultValue: String,
   },
 };
 </script>
