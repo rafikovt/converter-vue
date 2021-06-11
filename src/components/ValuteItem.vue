@@ -44,17 +44,16 @@ export default {
     mdbIcon,
   },
 
-  computed: {
-    nominal() {
-      return { name: "RUB", value: this.item.Nominal };
-    },
-    valute() {
-      return { name: this.item.CharCode, value: this.item.Value };
-    },
+  data() {
+    return {
+      nominal: { name: "RUB", value: this.item.Nominal },
+      valute: { name: this.item.CharCode, value: this.item.Value },
+    };
   },
 
   methods: {
     changeNominal() {
+      console.log(66);
       let test = this.valute;
       this.valute = this.nominal;
       this.nominal = test;

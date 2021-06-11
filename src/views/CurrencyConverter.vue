@@ -87,10 +87,6 @@ export default {
         .Name;
     },
   },
-
-  created() {
-    this.$store.dispatch("loadData");
-  },
 };
 </script>
 

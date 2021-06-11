@@ -22,7 +22,7 @@
         </select>
         <mdb-input
           type="number"
-          class="w-50"
+          class="w-25"
           :disabled="!main"
           :value="main ? defaultValue : computedValue"
           @input="$emit('changeValue', $event)"
@@ -62,6 +62,6 @@ export default {
 .content {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-around;
 }
 </style>
