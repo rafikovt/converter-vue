@@ -1,10 +1,11 @@
 <template>
   <mdb-card class="card">
     <mdb-card-body>
-      <mdb-card-title class="small">Австарлийский доллар</mdb-card-title>
+      <mdb-card-title class="small">{{ title }}</mdb-card-title>
       <div class="content">
         <select
           class="browser-default custom-select custom-select-sm w-50"
+          :value="defaultSelect"
           @change="
             main
               ? $emit('updateMainValute', $event.target.value)
@@ -45,8 +46,10 @@ export default {
   props: {
     selectData: Array,
     main: Boolean,
-    computedValue: String,
-    defaultValue: String,
+    computedValue: Number,
+    defaultValue: Number,
+    defaultSelect: Number,
+    title: String,
   },
 };
 </script>

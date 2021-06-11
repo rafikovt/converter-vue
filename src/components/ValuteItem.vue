@@ -44,11 +44,13 @@ export default {
     mdbIcon,
   },
 
-  data() {
-    return {
-      nominal: { name: "RUB", value: this.item.Nominal },
-      valute: { name: this.item.CharCode, value: this.item.Value },
-    };
+  computed: {
+    nominal() {
+      return { name: "RUB", value: this.item.Nominal };
+    },
+    valute() {
+      return { name: this.item.CharCode, value: this.item.Value };
+    },
   },
 
   methods: {

@@ -33,7 +33,6 @@ export default {
 
   computed: {
     items() {
-      console.log(1);
       return this.$store.state.data.filter(
         (e) =>
           e.CharCode.includes(this.$store.state.filterValue.toUpperCase()) ||

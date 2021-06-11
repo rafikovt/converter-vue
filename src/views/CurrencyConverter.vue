@@ -5,24 +5,34 @@
       :main="true"
       @updateMainValute="updateMainValute($event)"
       @changeValue="changeValue($event)"
-      :defaultValue="value"
+      :defaultValue="+value"
+      :defaultSelect="+mainValute"
+      :title="mainTitle"
     />
-    <mdb-icon icon="arrows-alt-h" size="2x" />
+    <div @click="changeCards">
+      <mdb-btn color="light-blue"
+        ><mdb-icon icon="arrows-alt-h" size="2x"
+      /></mdb-btn>
+    </div>
+
     <CardConverter
       :selectData="selectData"
       @updateComputedValute="updateComputedValute($event)"
-      :computedValue="computedValue"
+      :computedValue="+computedValue"
+      :defaultSelect="+computedValute"
+      :title="computedTitle"
     />
   </div>
 </template>
 
 <script>
-import { mdbIcon } from "mdbvue";
+import { mdbIcon, mdbBtn } from "mdbvue";
 import CardConverter from "@/components/CardConverter";
 
 export default {
   components: {
     mdbIcon,
+    mdbBtn,
     CardConverter,
   },
 
@@ -35,6 +45,12 @@ export default {
     },
     changeValue(event) {
       this.value = event;
+    },
+
+    changeCards() {
+      let temp = this.mainValute;
+      this.mainValute = this.computedValute;
+      this.computedValute = temp;
     },
   },
 
@@ -55,11 +71,25 @@ export default {
       return data;
     },
 
+    mainTitle() {
+      return this.$store.state.data.find((e) => e.Value == this.mainValute)
+        .Name;
+    },
+
     computedValue() {
       return ((+this.mainValute / +this.computedValute) * +this.value).toFixed(
         4
       );
     },
+
+    computedTitle() {
+      return this.$store.state.data.find((e) => e.Value == this.computedValute)
+        .Name;
+    },
+  },
+
+  created() {
+    this.$store.dispatch("loadData");
   },
 };
 </script>
