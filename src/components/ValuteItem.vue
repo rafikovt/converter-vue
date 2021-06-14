@@ -1,12 +1,15 @@
 <template>
-  <mdb-list-group-item class="list-item z-depth-2">
+  <mdb-list-group-item
+    @click.native="changeNominal"
+    class="list-item z-depth-2"
+  >
     <div>
       <div class="d-flex w-100 justify-content-between">
         <h5 class="mb-2 h5 grey-text darken-1 small">
           {{ item.Name }}
         </h5>
       </div>
-      <div @click.prevent="changeNominal" class="content">
+      <div class="content">
         <p class="mb-2 mr-2">1 {{ valute.name }}</p>
         <mdb-icon icon="arrows-alt-h" class="mb-2 mr-2 grey-text" size="lg" />
         <p class="mb-2 mr-4">
@@ -73,15 +76,16 @@ export default {
   padding: 15px;
   flex: 1 1 22%;
   border-radius: 10px !important;
+  cursor: pointer;
+}
+
+.list-item:hover {
+  background-color: #5c6bc0;
+  color: #fff;
 }
 
 .content {
   display: flex;
   align-items: center;
-}
-
-.content:hover {
-  cursor: pointer;
-  background-color: #e3f2fd;
 }
 </style>
