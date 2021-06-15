@@ -4,7 +4,7 @@
       <mdb-card-title class="small">{{ title }}</mdb-card-title>
       <div class="content">
         <select
-          class="browser-default custom-select custom-select-sm w-50"
+          class="browser-default custom-select custom-select-sm w-50 mr-2"
           :value="defaultSelect"
           @change="
             main
@@ -22,7 +22,7 @@
         </select>
         <mdb-input
           type="number"
-          class="w-25"
+          class="w-50"
           :disabled="!main"
           :value="main ? defaultValue : computedValue"
           @input="$emit('changeValue', $event)"

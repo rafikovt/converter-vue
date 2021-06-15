@@ -1,32 +1,47 @@
 <template>
   <div class="container">
-    <CardConverter
-      :selectData="selectData"
-      :main="true"
-      @updateMainValute="updateMainValute($event)"
-      @changeValue="changeValue($event)"
-      :defaultValue="+value"
-      :defaultSelect="+mainValute"
-      :title="mainTitle"
-    />
-    <div @click="changeCards">
-      <mdb-btn color="light-blue"
-        ><mdb-icon icon="arrows-alt-h" size="2x"
-      /></mdb-btn>
+    <div
+      v-if="$store.state.onLoading"
+      class="d-flex justify-content-center text-primary"
+    >
+      <div class="spinner-border" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
     </div>
+    <mdb-container v-if="$store.state.onError">
+      <mdb-alert color="danger">
+        Произошла ошибка при загрузке данных, попробуйте снова...
+      </mdb-alert>
+    </mdb-container>
+    <mdb-container v-if="!$store.state.onLoading">
+      <CardConverter
+        :selectData="selectData"
+        :main="true"
+        @updateMainValute="updateMainValute($event)"
+        @changeValue="changeValue($event)"
+        :defaultValue="+value"
+        :defaultSelect="+mainValute"
+        :title="mainTitle"
+      />
+      <div @click="changeCards">
+        <mdb-btn color="light-blue"
+          ><mdb-icon icon="arrows-alt-h" size="2x"
+        /></mdb-btn>
+      </div>
 
-    <CardConverter
-      :selectData="selectData"
-      @updateComputedValute="updateComputedValute($event)"
-      :computedValue="+computedValue"
-      :defaultSelect="+computedValute"
-      :title="computedTitle"
-    />
+      <CardConverter
+        :selectData="selectData"
+        @updateComputedValute="updateComputedValute($event)"
+        :computedValue="+computedValue"
+        :defaultSelect="+computedValute"
+        :title="computedTitle"
+      />
+    </mdb-container>
   </div>
 </template>
 
 <script>
-import { mdbIcon, mdbBtn } from "mdbvue";
+import { mdbIcon, mdbBtn, mdbContainer, mdbAlert } from "mdbvue";
 import CardConverter from "@/components/CardConverter";
 
 export default {
@@ -34,6 +49,8 @@ export default {
     mdbIcon,
     mdbBtn,
     CardConverter,
+    mdbContainer,
+    mdbAlert,
   },
 
   methods: {
@@ -56,10 +73,17 @@ export default {
 
   data() {
     return {
-      mainValute: +this.$store.state.data[0].Value,
-      computedValute: +this.$store.state.data[0].Value,
+      mainValute: null,
+      computedValute: null,
       value: "1",
     };
+  },
+
+  watch: {
+    selectData() {
+      this.mainValute = +this.$store.state.data[0].Value;
+      this.computedValute = +this.$store.state.data[0].Value;
+    },
   },
 
   computed: {

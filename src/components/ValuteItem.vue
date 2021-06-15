@@ -56,10 +56,9 @@ export default {
 
   methods: {
     changeNominal() {
-      console.log(66);
-      let test = this.valute;
+      let temp = this.valute;
       this.valute = this.nominal;
-      this.nominal = test;
+      this.nominal = temp;
     },
   },
 
