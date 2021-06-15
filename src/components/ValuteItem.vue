@@ -54,6 +54,13 @@ export default {
     };
   },
 
+  watch: {
+    item(val) {
+      this.nominal = { name: "RUB", value: val.Nominal };
+      this.valute = { name: val.CharCode, value: val.Value };
+    },
+  },
+
   methods: {
     changeNominal() {
       let temp = this.valute;

@@ -31,4 +31,14 @@ export default new Vuex.Store({
         });
     },
   },
+
+  getters: {
+    filteredData: (state) => {
+      return state.data.filter(
+        (e) =>
+          e.CharCode.includes(state.filterValue.toUpperCase()) ||
+          e.Name.toLowerCase().includes(state.filterValue.toLowerCase())
+      );
+    },
+  },
 });

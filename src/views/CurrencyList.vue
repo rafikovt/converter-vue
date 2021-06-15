@@ -33,13 +33,7 @@ export default {
 
   computed: {
     items() {
-      return this.$store.state.data.filter(
-        (e) =>
-          e.CharCode.includes(this.$store.state.filterValue.toUpperCase()) ||
-          e.Name.toLowerCase().includes(
-            this.$store.state.filterValue.toLowerCase()
-          )
-      );
+      return this.$store.getters.filteredData;
     },
   },
 };

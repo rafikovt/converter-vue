@@ -73,16 +73,20 @@ export default {
 
   data() {
     return {
-      mainValute: null,
-      computedValute: null,
+      mainValute: this.$store.state.data.length
+        ? this.$store.state.data[0].Value
+        : null,
+      computedValute: this.$store.state.data.length
+        ? this.$store.state.data[0].Value
+        : null,
       value: "1",
     };
   },
 
   watch: {
-    selectData() {
-      this.mainValute = +this.$store.state.data[0].Value;
-      this.computedValute = +this.$store.state.data[0].Value;
+    selectData(val) {
+      this.mainValute = val[0].value;
+      this.computedValute = val[0].value;
     },
   },
 
@@ -96,6 +100,7 @@ export default {
     },
 
     mainTitle() {
+      console.log(this.$store.state.dataS);
       return this.$store.state.data.find((e) => e.Value == this.mainValute)
         .Name;
     },

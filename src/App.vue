@@ -26,6 +26,7 @@
                 placeholder="Search"
                 aria-label="Search"
                 v-model="$store.state.filterValue"
+                :disabled="$route.name === 'Converter'"
               />
             </mdb-form-inline>
           </mdb-navbar-nav>
@@ -42,6 +43,7 @@ import {
   mdbNavbarToggler,
   mdbNavbarNav,
   mdbNavItem,
+  mdbFormInline,
 } from "mdbvue";
 export default {
   components: {
@@ -50,6 +52,7 @@ export default {
     mdbNavbarToggler,
     mdbNavbarNav,
     mdbNavItem,
+    mdbFormInline,
   },
 
   created() {
