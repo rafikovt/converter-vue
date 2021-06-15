@@ -1,5 +1,9 @@
 # converter
 
+Онлайн конвертер валют. Данные получены с API.
+Vue2.
+
+
 ## Project setup
 ```
 npm install
